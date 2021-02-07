@@ -3,7 +3,7 @@ name: Development - run applcation
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ main, develop ]
 
 jobs:
   build:
