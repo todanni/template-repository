@@ -30,7 +30,7 @@ jobs:
           context: .
           file: ./build/Dockerfile
           push: true
-          tags: ${{ env.GITHUB_REPOSITORY }}:latest
+          tags: ${{ github.repository }}:latest
           platforms: linux/amd64
       -
         name: Image digest
