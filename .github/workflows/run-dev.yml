@@ -1,0 +1,30 @@
+
+name: Development - run applcation
+
+on:
+  push:
+    branches: [ master, develop ]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+     
+      - name: Run container in dev
+        uses: appleboy/ssh-action@master
+        env:
+          GITHUB_USERNAME: danni-popova
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: ${{ secrets.DEV_DO_DROPLET_IP }}
+          username: root
+          key: ${{ secrets.ADMIN_SSH_KEY }}
+          envs: GITHUB_USERNAME, GITHUB_TOKEN
+          script: |
+            docker stop $(docker ps -a -q)
+            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            docker pull ${{ github.repository }}:latest
+            docker run -d -p 8083:8083 --name ${{ github.repository }} ${{ github.repository }}
