@@ -21,4 +21,4 @@ jobs:
         script: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
           docker pull ${{ github.repository }}:latest
-          docker run -d -p 8083:8083 --name ${{ github.repository }} ${{ github.repository }}
+          docker run -d -p 8083:8083 --name ${{ github.event.repository.name }} ${{ github.repository }}
