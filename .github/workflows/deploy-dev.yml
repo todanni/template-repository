@@ -37,10 +37,21 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
       - 
-        name: send message
+        name: Send discord failure message
+        if: ${{ failure() }}
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          color: "#FF0000"
+          message: "Failed to build and push Dev Images for ${{ github.repository }}"
+
+      - 
+        name: Send discord success message
+        if: ${{ success() }}
         uses: appleboy/discord-action@master
         with:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
-          message: "A new commit has been pushed with custom color."
+          message: "Dev Images built and pushed for ${{ github.repository }}"
