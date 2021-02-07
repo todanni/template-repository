@@ -1,4 +1,4 @@
-name: ci
+name: Development - build and deploy
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
           context: .
           file: ./build/Dockerfile
           push: true
-          tags: $GITHUB_REPOSITORY:latest
+          tags: todanni/template-repository:latest
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
