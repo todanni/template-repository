@@ -1,4 +1,4 @@
-name: Front End
+name: Template - build and deploy to dev
 
 on:
   push:
