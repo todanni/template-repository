@@ -61,22 +61,10 @@ jobs:
   run:
    runs-on: ubuntu-latest
    needs: [build]
-   steps: 
-      - 
-          name: Import secrets 
-          id: secrets
-          uses: hashicorp/vault-action@v2.0.1
-          with:
-           url: ${{ secrets.DEV_VAULT_ADDRESS }}
-           tlsSkipVerify: true
-           token: ${{ secrets.VAULT_TOKEN }}
-           secrets: |
-             kv/ci POSTGRESS_HOST ;
-             kv/ci POSTGRESS_USER ;
-             kv/ci POSTGRESS_NAME ;
-             kv/ci POSTGRESS_PASSWORD ;
-             kv/ci POSTGRESS_PORT
-                                       
+   steps:
+      -
+       name: Checkout
+       uses: actions/checkout@v2
           ## Run
       - 
        name: Run 
@@ -98,7 +86,7 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
           docker pull ${{ github.repository }}:latest
           docker rm -f ${{ github.event.repository.name }} 
-          docker run -d --name ${{ github.event.repository.name }} --network ${{ secrets.NETWORK }} --label "$HOST_LABEL" --label "$TLS_LABEL" --label "$CERT_LABEL" --env ${{ steps.secrets.outputs.POSTGRESS_HOST }} --env ${{ steps.secrets.outputs.POSTGRESS_USER }}  --env ${{ steps.secrets.outputs.POSTGRES_NAME }} --env ${{ steps.secrets.outputs.POSTGRES_PASSWORD }} --env ${{ steps.secrets.outputs.POSTGRES_PORT }} ${{ github.repository }}
+          docker run -d --name ${{ github.event.repository.name }} --network ${{ secrets.NETWORK }} --label "$HOST_LABEL" --label "$TLS_LABEL" --label "$CERT_LABEL" --env-file ./build/.env  ${{ github.repository }}
       - 
         name: Send discord failure message
         if: ${{ failure() }}
