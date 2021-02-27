@@ -10,7 +10,7 @@ import (
 	"github.com/todanni/template-repository/internal/database"
 	"github.com/todanni/template-repository/internal/repository"
 	"github.com/todanni/template-repository/internal/server"
-	"github.com/todanni/template-repository/pkg/example"
+	"github.com/todanni/template-repository/pkg/template"
 )
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 	}
 
 	// Perform any migrations needed to run the service
-	err = db.AutoMigrate(&example.Example{})
+	err = db.AutoMigrate(&template.Template{})
 	if err != nil {
 		log.Error(err)
 	}
@@ -38,7 +38,7 @@ func main() {
 	r := mux.NewRouter()
 
 	// Create servers by passing DB connection and router
-	server.NewExampleService(repository.NewRepository(db), r)
+	server.NewTemplateService(repository.NewRepository(db), r)
 
 	// Start the servers and listen
 	log.Fatal(http.ListenAndServe(":8083", r))

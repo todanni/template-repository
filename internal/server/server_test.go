@@ -6,18 +6,18 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/todanni/template-repository/pkg/example"
+	"github.com/todanni/template-repository/pkg/template"
 )
 
 func TestNewExampleService(t *testing.T) {
 	type args struct {
-		repo   example.Repository
+		repo   template.Repository
 		router *mux.Router
 	}
 	tests := []struct {
 		name string
 		args args
-		want example.Service
+		want template.Service
 	}{
 		// TODO: Add test cases.
 	}
@@ -32,7 +32,7 @@ func TestNewExampleService(t *testing.T) {
 
 func Test_exampleService_ExampleMethod(t *testing.T) {
 	type fields struct {
-		repo   example.Repository
+		repo   template.Repository
 		router *mux.Router
 	}
 	type args struct {

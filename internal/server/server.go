@@ -1,26 +1,26 @@
 package server
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/todanni/template-repository/pkg/example"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	"github.com/todanni/template-repository/pkg/template"
 )
 
-func NewExampleService(repo example.Repository, router *mux.Router) example.Service {
-	server := &exampleService{
-		repo: repo,
+func NewTemplateService(repo template.Repository, router *mux.Router) template.Service {
+	server := &templateService{
+		repo:   repo,
 		router: router,
 	}
 	server.routes()
 	return server
 }
 
-type exampleService struct {
-	repo example.Repository
+type templateService struct {
+	repo   template.Repository
 	router *mux.Router
 }
 
-func (s *exampleService) ExampleMethod(w http.ResponseWriter, r *http.Request) {
+func (s *templateService) TemplateMethod(w http.ResponseWriter, r *http.Request) {
 	panic("implement me")
 }
-

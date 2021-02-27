@@ -1,11 +1,11 @@
 package repository
 
 import (
-	"github.com/todanni/template-repository/pkg/example"
+	"github.com/todanni/template-repository/pkg/template"
 	"gorm.io/gorm"
 )
 
-func NewRepository(db *gorm.DB) example.Repository  {
+func NewRepository(db *gorm.DB) template.Repository  {
 	return &repository{
 		db: db,
 	}
@@ -15,6 +15,6 @@ type repository struct {
 	db *gorm.DB
 }
 
-func (r repository) ExampleGet() ([]example.Example, error) {
+func (r repository) TemplateGet() ([]template.Template, error) {
 	panic("implement me")
 }

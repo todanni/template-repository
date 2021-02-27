@@ -2,7 +2,7 @@ package server
 
 import "net/http"
 
-func (s *exampleService) routes() {
-	// GET an example
-	s.router.HandleFunc("/api/example", s.ExampleMethod).Methods(http.MethodGet)
+func (s *templateService) routes() {
+	// GET an template
+	s.router.HandleFunc("/api/template", s.TemplateMethod).Methods(http.MethodGet)
 }
