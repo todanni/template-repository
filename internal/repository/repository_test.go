@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/todanni/template-repository/pkg/example"
+	"github.com/todanni/template-repository/pkg/template"
 	"gorm.io/gorm"
 )
 
@@ -15,7 +15,7 @@ func TestNewRepository(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want example.Repository
+		want template.Repository
 	}{
 		// TODO: Add test cases.
 	}
@@ -35,7 +35,7 @@ func Test_repository_ExampleGet(t *testing.T) {
 	tests := []struct {
 		name    string
 		fields  fields
-		want    []example.Example
+		want    []template.Example
 		wantErr bool
 	}{
 		// TODO: Add test cases.
