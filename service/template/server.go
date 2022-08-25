@@ -1,13 +1,12 @@
-package server
+package template
 
 import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/todanni/template-repository/pkg/template"
 )
 
-func NewTemplateService(repo template.Repository, router *mux.Router) template.Service {
+func NewTemplateService(repo Repository, router *mux.Router) template.Service {
 	server := &templateService{
 		repo:   repo,
 		router: router,
