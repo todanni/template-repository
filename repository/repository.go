@@ -1,11 +1,10 @@
 package repository
 
 import (
-	"github.com/todanni/template-repository/pkg/template"
 	"gorm.io/gorm"
 )
 
-func NewRepository(db *gorm.DB) template.Repository  {
+func NewRepository(db *gorm.DB) template.Repository {
 	return &repository{
 		db: db,
 	}

@@ -1,8 +1,9 @@
 name: Template - build and deploy a Go service to production
 
 on:
-  push:
-    branches: [ main ]
+# To enable deployments, uncomment the following two lines
+#  push:
+#    branches: [ main ]
 
 jobs:
   build:
@@ -75,6 +76,7 @@ jobs:
           ## Traefik labels
           HOST_LABEL: traefik.http.routers.${{ github.event.repository.name }}.rule=Host(`todanni.com`) && PathPrefix(`/`)
           MIDDLEWARE_LABEL: traefik.http.routers.${{ github.event.repository.name }}.middlewares=https-redirect@docker
+# Change the path prefix to the paths your Go HTTP server is accepting
           TLS_HOST_LABEL: traefik.http.routers.${{ github.event.repository.name }}-tls.rule=Host(`todanni.com`) && PathPrefix(`/api/calendar`)
           TLS_CERT_LABEL: traefik.http.routers.${{ github.event.repository.name }}-tls.tls.certresolver=letsencrypt
           TLS_LABEL: traefik.http.routers.${{ github.event.repository.name }}-tls.tls=true
