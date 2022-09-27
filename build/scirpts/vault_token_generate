@@ -39,4 +39,4 @@ go mod init "github.com/todanni/${REPOSITORY_NAME}"
 
 # Commit and push the created files
 git commit -am "Initialise go.mod"
-git push
+git push origin branch_name
